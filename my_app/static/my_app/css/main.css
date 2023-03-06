@@ -1,0 +1,59 @@
+.main_main {
+  width: 100%;
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+
+  width: 70%;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 0.5rem;
+
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.result_date {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--color-gold);
+}
+
+.result_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+}
+
+.result_title {
+  font-size: 2rem;
+  color: var(--color-gold);
+}
+
+.result_amount {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+}

@@ -1,4 +1,31 @@
-{% extends 'base.html' %} {% block content %}
-<h1>THIS IS THE MAIN PAGE</h1>
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<main class="body_main">
+  <nav class="nav nav_main">
+    <img
+      class="logo"
+      src="{% static 'my_app/images/logo_thin.png' %}"
+      alt="App Logo"
+    />
+    <ul class="nav_items">
+      <li class="nav_item">Add new</li>
+      <li class="nav_item">Log out</li>
+    </ul>
+  </nav>
+
+  <section class="main_main">
+    <ul class="results">
+      {% for expense in expenses %}
+      <li class="result">
+        <p class="result_date">{{expense.date}}</p>
+        <div class="result_box">
+          <span class="result_title">{{expense.title}}</span>
+          <span class="result_amount">{{expense.amount}}</span>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</main>
 
 {% endblock %}

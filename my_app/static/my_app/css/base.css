@@ -1,0 +1,34 @@
+:root {
+  --font-style-primary: "Roboto", sans-serif;
+  --color-gold: #edce62;
+  --color-border: #9f9d9d;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 3rem;
+  background-color: #237277;
+  font-family: var(--font-style-primary);
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  width: 25rem;
+  height: auto;
+}
+
+.nav_items {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2rem;
+  font-size: 2rem;
+  color: white;
+}
