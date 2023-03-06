@@ -20,6 +20,12 @@
   background-color: white;
 }
 
+.filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .result {
   display: flex;
   flex-direction: column;

@@ -15,6 +15,17 @@
 
   <section class="main_main">
     <ul class="results">
+      <li class="filter">
+        <form class="filter_form" method="GET">
+          {% csrf_token %} {% for field in form %}
+          <div class="filter_form_group">
+            {{ field.label_tag }} {{ field }} {{ field.errors }}
+          </div>
+
+          {% endfor %}
+          <input type="submit" />
+        </form>
+      </li>
       {% for expense in expenses %}
       <li class="result">
         <p class="result_date">{{expense.date}}</p>
