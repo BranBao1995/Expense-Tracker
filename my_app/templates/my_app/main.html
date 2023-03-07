@@ -19,11 +19,17 @@
         <form class="filter_form" method="GET">
           {% csrf_token %} {% for field in form %}
           <div class="filter_form_group">
-            {{ field.label_tag }} {{ field }} {{ field.errors }}
+            <div class="filter_form_group_label">{{ field.label_tag }}</div>
+            <div class="filter_form_group_field">{{ field }}</div>
+            <div class="filter_form_group_error">{{ field.errors }}</div>
           </div>
-
           {% endfor %}
-          <input type="submit" />
+          <div class="filter_form_buttons">
+            <input class="button_submit" type="submit" value="Search" />
+            <a class="button_render_all" href="{% url 'my_app:main' %}"
+              >Get all</a
+            >
+          </div>
         </form>
       </li>
       {% for expense in expenses %}

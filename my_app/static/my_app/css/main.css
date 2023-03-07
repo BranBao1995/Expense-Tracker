@@ -24,6 +24,63 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+}
+
+.filter_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.5rem;
+
+  width: 100%;
+}
+
+.filter_form_group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.6rem;
+
+  width: 100%;
+}
+
+.filter_form_buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+
+  width: 70%;
+}
+
+.button_submit {
+  width: 25%;
+  padding: 0.3rem;
+  font-size: 2rem;
+  font-family: var(--font-primary);
+  color: var(--color-gold);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.filter_form_buttons .button_render_all {
+  width: 25%;
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 2rem;
+  font-family: var(--font-primary);
+  color: var(--color-gold);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .result {
