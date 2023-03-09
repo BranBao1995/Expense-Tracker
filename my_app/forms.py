@@ -13,4 +13,4 @@ for year in range(max_year, 1899, -1):
 # print(years)
 
 class DateForm(forms.Form):
-    date = forms.DateField(label='Select a date', required=True, widget=forms.SelectDateWidget(years=years))
+    date = forms.DateField(label='Select a date', required=True, widget=forms.SelectDateWidget(years=years, attrs={'class': 'dropdowns'}))
