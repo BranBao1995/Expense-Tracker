@@ -35,5 +35,13 @@ def main(request):
     
 
 
-def edit(request):
-    return render(request, 'my_app/edit.html')
+def edit(request, target):
+
+    expense = models.Expense.objects.get(pk=int(target))
+    context = {'expense': expense}
+
+    return render(request, 'my_app/edit.html', context=context)
+
+def add(request):
+
+    return render(request, 'my_app/add.html')

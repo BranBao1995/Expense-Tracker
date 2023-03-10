@@ -33,17 +33,36 @@
         </form>
       </li>
       {% for expense in expenses %}
-      <li class="result">
-        <p class="result_date">{{expense.date}}</p>
-        <div class="result_box">
-          <span class="result_title">{{expense.title}}</span>
-          <span class="result_amount">{{expense.amount}}</span>
-          <span class="result_amount">{{expense.id}}</span>
+      <li class="result" data-id="{{expense.id}}">
+        <p class="result_date" data-id="{{expense.id}}">{{expense.date}}</p>
+        <div class="result_box" data-id="{{expense.id}}">
+          <span class="result_title" data-id="{{expense.id}}"
+            >{{expense.title}}</span
+          >
+          <span class="result_amount" data-id="{{expense.id}}"
+            >${{expense.amount}}</span
+          >
+          <span
+            class="result_description"
+            data-id="{{expense.id}}"
+            style="display: none"
+            >{{expense.description}}</span
+          >
         </div>
       </li>
       {% endfor %}
     </ul>
+
+    <div class="detail" style="display: none">
+      <h1 class="detail_title"></h1>
+      <h2 class="detail_date"></h2>
+      <h2 class="detail_amount"></h2>
+      <p class="detail_description"></p>
+      <button class="button_edit">Edit</button>
+    </div>
   </section>
 </main>
 
-{% endblock %}
+{% if expenses %}
+<script src="{% static 'my_app/js/main.js' %}"></script>
+{% endif %} {% endblock %}
