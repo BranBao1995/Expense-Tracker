@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http.response import HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from . import models
-from .forms import DateForm
+from .forms import DateForm, EditForm
 import datetime
 
 # Create your views here.
@@ -37,10 +37,18 @@ def main(request):
 
 def edit(request, target):
 
-    expense = models.Expense.objects.get(pk=int(target))
-    context = {'expense': expense}
-
-    return render(request, 'my_app/edit.html', context=context)
+    if request.POST:
+        print(request.POST)
+        form = EditForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+        return redirect(reverse('my_app:main'))
+    else:
+        form = EditForm()
+        expense = models.Expense.objects.get(pk=int(target))
+        context = {'expense': expense, 'form': form}
+        return render(request, 'my_app/edit.html', context=context)
 
 def add(request):
 

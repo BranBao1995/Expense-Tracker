@@ -13,6 +13,31 @@
   </nav>
 </main>
 
-<section class="edit_main"></section>
+<section class="edit_main">
+  <form class="edit_form" method="POST">
+    {% csrf_token %} {% for field in form %}
 
-{% endblock %}
+    <div class="edit_form_group">
+      <div class="edit_form_group_label">{{field.label_tag}}</div>
+      <div class="edit_form_group_input">{{field}}</div>
+      <div class="edit_form_group_error">{{field.errors}}</div>
+    </div>
+
+    {% endfor %}
+    <div class="edit_form_buttons">
+      <input class="button_submit" type="submit" />
+      <a class="button_discard" href="{% url 'my_app:main' %}">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<div class="hidden" style="display: none">
+  <p class="expense_title">{{expense.title}}</p>
+  <p class="expense_date">{{expense.date}}</p>
+  <p class="expense_amount">{{expense.amount}}</p>
+  <p class="expense_description">{{expense.description}}</p>
+</div>
+
+{% if expense %}
+<script src="{% static 'my_app/js/edit.js' %}"></script>
+{% endif %} {% endblock %}
