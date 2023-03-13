@@ -39,10 +39,31 @@ def edit(request, target):
 
     if request.POST:
         print(request.POST)
-        form = EditForm(request.POST)
-        if form.is_valid():
-            form.save()
-            
+
+        expense = models.Expense.objects.get(pk=int(target))
+
+        title = request.POST['title']
+        amount = request.POST['amount']
+        description = request.POST['description']
+        year = request.POST['date_year']
+        month = request.POST['date_month']
+        day = request.POST['date_day']
+
+        if int(month) < 10:
+            month = '0' + month
+
+        if int(day) < 10:
+            day = '0' + day
+
+        date = year + '-' + month + '-' + day
+
+        expense.title = title
+        expense.date = date
+        expense.amount = amount
+        expense.description = description
+
+        expense.save()
+
         return redirect(reverse('my_app:main'))
     else:
         form = EditForm()
