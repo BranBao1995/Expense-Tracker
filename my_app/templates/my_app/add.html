@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 
-<main class="add_main">
+<main class="body_main">
   <nav class="nav nav_add">
     <img
       class="logo"
@@ -8,10 +8,28 @@
       alt="App Logo"
     />
     <ul class="nav_items">
-      <li class="nav_item">Add new</li>
-      <li class="nav_item">Log out</li>
+      <a class="nav_item" href="{% url 'my_app:main' %}">Dashboard</a>
+      <a class="nav_item" href="#">Log out</a>
     </ul>
   </nav>
+
+  <section class="add_main">
+    <form class="add_form" method="POST">
+      {% csrf_token %} {% for field in form %}
+
+      <div class="add_form_group">
+        <div class="add_form_group_label">{{field.label_tag}}</div>
+        <div class="add_form_group_input">{{field}}</div>
+        <div class="add_form_group_error">{{field.errors}}</div>
+      </div>
+
+      {% endfor %}
+      <div class="add_form_buttons">
+        <input class="button_submit" type="submit" />
+        <a class="button_discard" href="{% url 'my_app:main' %}">Cancel</a>
+      </div>
+    </form>
+  </section>
 </main>
 
 {% endblock %}

@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator,MinValueValidator,EmailVali
 
 
 class Expense(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
     date = models.DateField() 
     amount = models.IntegerField(validators=[MinValueValidator(0)]) 
     description = models.TextField()

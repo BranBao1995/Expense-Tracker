@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from . import models
-from .forms import DateForm, EditForm
+from .forms import DateForm, EditForm, AddForm
 import datetime
 
 # Create your views here.
@@ -61,7 +61,7 @@ def edit(request, target):
 
             expense.title = title
             expense.date = date
-            expense.amount = amount
+            expense.amount = int(amount)
             expense.description = description
 
             expense.save()
@@ -76,4 +76,31 @@ def edit(request, target):
 
 def add(request):
 
-    return render(request, 'my_app/add.html')
+    if request.method == 'POST':
+        form = AddForm(request.POST)
+
+        if form.is_valid():
+
+            title = request.POST['title']
+            year = request.POST['date_year']
+            month = request.POST['date_month']
+            day = request.POST['date_day']
+            amount = request.POST['amount']
+            description = request.POST['description']
+
+            if int(month) < 10:
+                month = '0' + month
+
+            if int(day) < 10:
+                day = '0' + day
+
+            date = year + '-' + month + '-' + day
+
+            models.Expense.objects.create(title = title, date = date, amount = amount, description = description)
+
+            return redirect(reverse('my_app:main'))
+        
+    else:
+        form = AddForm()
+        context = {'form': form}
+        return render(request, 'my_app/add.html', context=context)
