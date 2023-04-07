@@ -29,6 +29,32 @@
         <a class="button_discard" href="{% url 'my_app:main' %}">Cancel</a>
       </div>
     </form>
+
+    <!-- <form method="POST">
+      {% csrf_token %}
+      <div class="add_form_group">
+        <label for="title">Title</label>
+        <input id="title" type="text" name="title" />
+      </div>
+
+      <div class="add_form_group">
+        <label for="date">Date</label>
+        <input id="date" type="text" name="date" />
+      </div>
+
+      <div class="add_form_group">
+        <label for="amount">Amount</label>
+        <input id="amount" type="text" name="amount" />
+      </div>
+
+      <div class="add_form_group">
+        <label for="description">Description</label>
+        <input id="description" type="text" name="description" />
+      </div>
+
+      <input class="button_submit" type="submit" />
+      <a class="button_discard" href="{% url 'my_app:main' %}">Cancel</a>
+    </form> -->
   </section>
 </main>
 
