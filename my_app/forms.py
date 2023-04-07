@@ -11,7 +11,8 @@ years = []
 for year in range(max_year, 1899, -1):
     years.append(str(year))
 
-
+# Django form field cannot use 'validators=[]' argument, instead, specify max_length, min_length, max_value, min_value
+# or refer to https://docs.djangoproject.com/en/4.1/ref/forms/fields/ instead
 
 class AddForm(ModelForm):
      class Meta:
@@ -75,8 +76,6 @@ class EditForm(ModelForm):
         }
 
 
-# Django form field cannot use 'validators=[]' argument, instead, specify max_length, min_length, max_value, min_value
-# or refer to https://docs.djangoproject.com/en/4.1/ref/forms/fields/ instead
 
 class DateForm(forms.Form):
     date = forms.DateField(label='Select a date', widget=forms.SelectDateWidget(years=years, attrs={'class': 'dropdowns'}))

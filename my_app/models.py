@@ -10,7 +10,7 @@ from django.core.validators import MinValueValidator, MinLengthValidator
 class Expense(models.Model):
     # max_length is required for models.CharField
     # model fields can use the 'validators=[]' argument
-    title = models.CharField(max_length=100, validators=[MinLengthValidator(5)])
+    title = models.CharField(max_length=100, validators=[MinLengthValidator(1)])
     date = models.DateField() 
     amount = models.IntegerField(validators=[MinValueValidator(0)]) 
     description = models.TextField()
