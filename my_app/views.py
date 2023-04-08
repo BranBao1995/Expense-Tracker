@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
@@ -7,6 +8,24 @@ from .forms import DateForm, EditForm, AddForm
 
 
 # Create your views here.
+
+
+# Manual login view
+# def auth_login(request):
+
+#     if request.method == 'POST':
+#         username = request.POST["username"]
+#         password = request.POST["password"]
+#         user = authenticate(request, username=username, password=password)
+#         print(user)
+#         if user is not None:
+#             login(request, user)
+#             return redirect(reverse('my_app:landing')) 
+#         else:
+#             return HttpResponse('Error Logging In')
+
+#     return render(request, 'my_app/login.html')
+
 
 def landing(request):
     return render(request, 'my_app/landing.html')

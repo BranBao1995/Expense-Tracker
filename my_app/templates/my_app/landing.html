@@ -1,4 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <h1>THIS IS THE LANDING PAGE</h1>
+<a href="{% url 'login' %}">Go to login</a>
+<a href="{% url 'logout' %}">Click to logout</a>
 
 {% endblock %}
