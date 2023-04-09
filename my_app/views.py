@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import UserCreationForm 
 from . import models
-from .forms import DateForm, EditForm, AddForm
+from .forms import DateForm, EditForm, AddForm, NewUserCreationForm
+# from django.contrib.auth.forms import UserCreationForm 
+
 
 
 # Create your views here.
@@ -34,7 +35,7 @@ def signup_user(request):
 
     if request.method == 'POST':
 
-        form = UserCreationForm(request.POST)
+        form = NewUserCreationForm(request.POST)
         context = {'form': form}
 
         if form.is_valid():
@@ -43,7 +44,7 @@ def signup_user(request):
         
     else:
 
-        form = UserCreationForm()
+        form = NewUserCreationForm()
         context = {'form': form}
 
     return render(request, 'my_app/signup.html', context=context)

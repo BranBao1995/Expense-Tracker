@@ -128,4 +128,4 @@ LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = "myapp.User"
+AUTH_USER_MODEL = "my_app.User"

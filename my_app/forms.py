@@ -1,7 +1,10 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Expense
+from django.contrib.auth.forms import UserCreationForm
+from .models import Expense, User
 import datetime
+from django.contrib.auth.forms import UserCreationForm
+
 
 max_year = datetime.datetime.now().year
 
@@ -13,6 +16,11 @@ for year in range(max_year, 1899, -1):
 
 # Django form field cannot use 'validators=[]' argument, instead, specify max_length, min_length, max_value, min_value
 # or refer to https://docs.djangoproject.com/en/4.1/ref/forms/fields/ instead
+
+class NewUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = UserCreationForm.Meta.fields
 
 class AddForm(ModelForm):
      class Meta:
