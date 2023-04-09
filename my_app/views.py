@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import UserCreationForm 
 from . import models
 from .forms import DateForm, EditForm, AddForm
 
@@ -26,10 +28,32 @@ from .forms import DateForm, EditForm, AddForm
 
 #     return render(request, 'my_app/login.html')
 
+def signup_user(request):
+
+    context = None
+
+    if request.method == 'POST':
+
+        form = UserCreationForm(request.POST)
+        context = {'form': form}
+
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('my_app:landing'))
+        
+    else:
+
+        form = UserCreationForm()
+        context = {'form': form}
+
+    return render(request, 'my_app/signup.html', context=context)
+
 
 def landing(request):
     return render(request, 'my_app/landing.html')
 
+
+@login_required
 def main(request):
     form = DateForm()
     if request.GET:
@@ -49,7 +73,7 @@ def main(request):
         date = year + '-' + month + '-' + day
         all_expenses = models.Expense.objects.filter(date=date)
     else:
-        all_expenses = models.Expense.objects.all()
+        all_expenses = models.Expense.objects.filter(author=request.user.id)
     
     context = {'expenses': all_expenses, 'form': form}
     return render(request,'my_app/main.html',context=context)      
@@ -57,6 +81,7 @@ def main(request):
 
 # Using model form
 
+@login_required
 def edit(request, target):
 
     context = None
@@ -68,9 +93,13 @@ def edit(request, target):
         context = {'form': form}
 
         if form.is_valid():
-    
-            form.save()
-            return redirect(reverse('my_app:main')) 
+
+            try:
+                form.save()
+            except:
+                return HttpResponse('Error saving form.')
+            else:
+                return redirect(reverse('my_app:main'))
                 
     else:
         expense = models.Expense.objects.get(pk=int(target))
@@ -81,6 +110,7 @@ def edit(request, target):
     return render(request, 'my_app/edit.html', context=context)
 
 
+@login_required
 def add(request):
 
     context = None
@@ -90,11 +120,19 @@ def add(request):
         form = AddForm(request.POST)
         context = {'form': form}
 
+        for field in form:
+            print(field.value())
+
         if form.is_valid():
 
-            form.save()
-            return redirect(reverse('my_app:main'))     
-
+            try:
+                instance = form.save(commit=False)
+                instance.author = request.user
+                instance.save()
+            except ValueError:
+                return HttpResponse('ValueError')
+            else:   
+                return redirect(reverse('my_app:main'))
     else:
 
         form = AddForm()

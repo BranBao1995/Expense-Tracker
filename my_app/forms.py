@@ -18,7 +18,7 @@ class AddForm(ModelForm):
      class Meta:
         model = Expense
        
-        fields = "__all__"
+        fields = ['title', 'date', 'amount', 'description']
 
         labels = {
             'title':"Title",
@@ -49,7 +49,7 @@ class EditForm(ModelForm):
      class Meta:
         model = Expense
        
-        fields = "__all__"
+        fields = ['title', 'date', 'amount', 'description']
 
         labels = {
             'title':"Title",
