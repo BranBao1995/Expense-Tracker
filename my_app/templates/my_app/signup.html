@@ -1,8 +1,40 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
-<form method="post">
-  {% csrf_token %} {{form.as_p}}
-  <input type="submit" value="signup" />
-</form>
+<main class="body_main">
+  <nav class="nav" id="nav_signup">
+    <a class="logo_link" href="{% url 'my_app:landing' %}">
+      <img
+        class="logo"
+        src="{% static 'my_app/images/logo_thin.png' %}"
+        alt="App Logo"
+      />
+    </a>
+  </nav>
+
+  <section class="signup_main">
+    <form class="form" method="post">
+      <!-- {% csrf_token %} {{form.as_p}} -->
+      {% csrf_token %} {% for field in form %}
+
+      <div class="form_group">
+        <div class="form_group_label">{{field.label_tag}}</div>
+        <div class="form_group_input">{{field}}</div>
+        {% if field.help_text %}
+        <div class="form_group_helptext">{{field.help_text}}</div>
+        {% endif %} {% if field.errors %}
+        <div class="form_group_error">{{field.errors}}</div>
+        {% endif %}
+      </div>
+
+      {% endfor %}
+      <div class="form_buttons">
+        <input class="button_submit" type="submit" value="signup" />
+      </div>
+    </form>
+    <a class="login_link" href="{% url 'login' %}"
+      >Already have an account? Login instead.</a
+    >
+  </section>
+</main>
 
 {% endblock %}

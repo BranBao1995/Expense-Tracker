@@ -1,0 +1,35 @@
+#nav_landing {
+  justify-content: center;
+}
+
+.landing_main {
+  width: 100%;
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing_actions {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 4rem;
+}
+
+.btn_landing,
+.btn_landing:active,
+.btn_landing:visited {
+  padding: 1rem;
+  text-decoration: none;
+  color: white;
+  font-size: 2rem;
+  font-family: var(--font-style-primary);
+}
+
+.btn_landing:hover {
+  border-bottom: 1px solid white;
+}

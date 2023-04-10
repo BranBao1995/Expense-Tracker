@@ -1,11 +1,13 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 <main class="body_main">
   <nav class="nav nav_edit">
-    <img
-      class="logo"
-      src="{% static 'my_app/images/logo_thin.png' %}"
-      alt="App Logo"
-    />
+    <a class="logo_link" href="{% url 'my_app:landing' %}">
+      <img
+        class="logo"
+        src="{% static 'my_app/images/logo_thin.png' %}"
+        alt="App Logo"
+      />
+    </a>
     <ul class="nav_items">
       <a class="nav_item" href="{% url 'my_app:main' %}">Dashboard</a>
       <a class="nav_item" href="{% url 'my_app:add' %}">Add new</a>
@@ -16,17 +18,17 @@
   </nav>
 
   <section class="edit_main">
-    <form class="edit_form" method="POST">
+    <form class="form" method="POST">
       {% csrf_token %} {% for field in form %}
 
-      <div class="edit_form_group">
-        <div class="edit_form_group_label">{{field.label_tag}}</div>
-        <div class="edit_form_group_input">{{field}}</div>
-        <div class="edit_form_group_error">{{field.errors}}</div>
+      <div class="form_group">
+        <div class="form_group_label">{{field.label_tag}}</div>
+        <div class="form_group_input">{{field}}</div>
+        <div class="form_group_error">{{field.errors}}</div>
       </div>
 
       {% endfor %}
-      <div class="edit_form_buttons">
+      <div class="form_buttons">
         <input class="button_submit" type="submit" />
         <a class="button_discard" href="{% url 'my_app:main' %}">Cancel</a>
       </div>

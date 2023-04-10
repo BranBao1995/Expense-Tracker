@@ -1,17 +1,50 @@
-{% extends 'base.html' %} {% block content %} {% if form.errors %}
-<p>Your username or password was incorrect. Try again.</p>
-{% endif %} {% if next %} {% if user.is_authenticated %}
-<p>You dont have permission for this page</p>
+{% extends 'base.html' %} {% block content %} {% load static %}
 
-{% else %}
-<p>Please login to see this page</p>
-{% endif %} {% endif %}
+<main class="body_main">
+  <nav class="nav" id="nav_login">
+    <a class="logo_link">
+      <img
+        class="logo"
+        src="{% static 'my_app/images/logo_thin.png' %}"
+        alt="App Logo"
+      />
+    </a>
+  </nav>
 
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %} {{form.username.label_tag}} {{form.username}}
-  {{form.password.label_tag}} {{form.password}}
-  <input type="submit" value="login" />
-  <input type="hidden" name="next" value="{{next}}" />
-</form>
+  <section class="login_main">
+    <div class="login_messages">
+      {% if form.errors %}
+      <p class="login_message">
+        Your username or password was incorrect. Try again.
+      </p>
+      {% endif %} {% if next %} {% if user.is_authenticated %}
+      <p class="login_message">You dont have permission for this page</p>
+
+      {% else %}
+      <p class="login_message">Please login to see this page</p>
+      {% endif %} {% endif %}
+    </div>
+
+    <form class="form" method="post" action="{% url 'login' %}">
+      {% csrf_token %} {% for field in form %}
+      <div class="form_group">
+        <div class="form_group_label">{{field.label_tag}}</div>
+        <div class="form_group_input">{{field}}</div>
+        <div class="form_group_error">{{field.errors}}</div>
+      </div>
+      {% endfor %}
+      <div class="form_buttons">
+        <input class="button_submit" type="submit" value="login" />
+        <input type="hidden" name="next" value="{{next}}" />
+      </div>
+      <!-- {{form.username.label_tag}} {{form.username}}
+      {{form.password.label_tag}} {{form.password}} -->
+    </form>
+
+    <a class="signup_link" href="{% url 'my_app:signup' %}"
+      >Don't have an account yet? Sign up instead.</a
+    >
+  </section>
+</main>
 
 {% endblock %}

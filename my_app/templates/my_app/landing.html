@@ -1,9 +1,55 @@
-{% extends 'base.html' %} {% block content %}
-<h1>THIS IS THE LANDING PAGE</h1>
-{% if user.is_authenticated %}
-<a href="{% url 'logout' %}">Click to logout</a>
-{% else %}
-<a href="{% url 'login' %}?next={{request.path}}">Go to login</a>
-{% endif %}
-<a href="{% url 'my_app:signup' %}">Sign up a new account</a>
+{% extends 'base.html' %} {% block content %} {% load static %}
+<main class="body_main">
+  {% if user.is_authenticated %}
+  <nav class="nav">
+    <a class="logo_link" href="{% url 'my_app:landing' %}">
+      <img
+        class="logo"
+        src="{% static 'my_app/images/logo_thin.png' %}"
+        alt="App Logo"
+      />
+    </a>
+    <ul class="nav_items">
+      <a class="nav_item" href="{% url 'my_app:main' %}">Dashboard</a>
+      {% if user.is_authenticated %}
+      <a class="nav_item" href="{% url 'logout' %}">Logout</a>
+      {% endif %}
+    </ul>
+  </nav>
+  {% else %}
+  <nav class="nav" id="nav_landing">
+    <a class="logo_link" href="{% url 'my_app:landing' %}">
+      <img
+        class="logo"
+        src="{% static 'my_app/images/logo_thin.png' %}"
+        alt="App Logo"
+      />
+    </a>
+  </nav>
+  {% endif %}
+
+  <section class="landing_main">
+    <div class="landing_actions">
+      {% if user.is_authenticated %}
+      <a class="btn_landing" id="btn_landing_logout" href="{% url 'logout' %}"
+        >Click to logout</a
+      >
+      {% else %}
+      <a
+        class="btn_landing"
+        id="btn_landing_login"
+        href="{% url 'login' %}?next={{request.path}}"
+        >Go to login</a
+      >
+      <a
+        class="btn_landing"
+        id="btn_landing_signup"
+        href="{% url 'my_app:signup' %}"
+        >Sign up for a new account</a
+      >
+      {% endif %}
+    </div>
+  </section>
+</main>
+
 {% endblock %}

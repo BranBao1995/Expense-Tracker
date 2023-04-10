@@ -47,6 +47,7 @@ def signup_user(request):
         form = NewUserCreationForm()
         context = {'form': form}
 
+
     return render(request, 'my_app/signup.html', context=context)
 
 
@@ -72,7 +73,7 @@ def main(request):
             day = data['date_day']
 
         date = year + '-' + month + '-' + day
-        all_expenses = models.Expense.objects.filter(date=date)
+        all_expenses = models.Expense.objects.filter(date=date).filter(author=request.user.id)
     else:
         all_expenses = models.Expense.objects.filter(author=request.user.id)
     

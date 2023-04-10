@@ -2,11 +2,14 @@
 
 <main class="body_main">
   <nav class="nav nav_main">
-    <img
-      class="logo"
-      src="{% static 'my_app/images/logo_thin.png' %}"
-      alt="App Logo"
-    />
+    <a class="logo_link" href="{% url 'my_app:landing' %}">
+      <img
+        class="logo"
+        src="{% static 'my_app/images/logo_thin.png' %}"
+        alt="App Logo"
+      />
+    </a>
+
     <ul class="nav_items">
       <a class="nav_item" href="{% url 'my_app:add' %}">Add new</a>
       {% if user.is_authenticated %}
