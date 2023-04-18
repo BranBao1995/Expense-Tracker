@@ -21,7 +21,7 @@ class Expense(models.Model):
     title = models.CharField(max_length=100, validators=[MinLengthValidator(1)])
     date = models.DateField() 
     amount = models.IntegerField(validators=[MinValueValidator(0)]) 
-    description = models.TextField()
+    description = models.TextField(blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
